@@ -2,7 +2,9 @@
 
 ## Rules
 
-The game provides a Kalah board and a number of seeds or counters. The board has 6 small pits, called houses, on each side; and a big pit, called an end zone or store, at each end. The object of the game is to capture more seeds than one's opponent.
+The game provides a Kalah board and a number of seeds or counters. 
+The board has 6 small pits, called houses, on each side; and a big pit, called an end zone or store, at each end. 
+The object of the game is to capture more seeds than one's opponent.
 
 1. At the beginning of the game, four seeds are placed in each house. This is the traditional method.
 2. Each player controls the six houses and their seeds on the player's side of the board. The player's score is the number of seeds in the store to their right.
