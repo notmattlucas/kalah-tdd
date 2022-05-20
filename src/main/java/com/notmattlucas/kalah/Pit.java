@@ -4,9 +4,12 @@ abstract class Pit {
 
     protected int seeds;
 
-    protected Pit next;
+    private Pit next;
 
-    public Pit(int seeds) {
+    protected final PlayerNumber owner;
+
+    Pit(PlayerNumber owner, int seeds) {
+        this.owner = owner;
         this.seeds = seeds;
     }
 
@@ -20,7 +23,7 @@ abstract class Pit {
 
     public Pit setNext(Pit next) {
         this.next = next;
-        return this;
+        return next;
     }
 
     public void sow() {
@@ -30,5 +33,11 @@ abstract class Pit {
     public boolean isEmpty() {
         return this.seeds == 0;
     }
+
+    public PlayerNumber getOwner() {
+        return owner;
+    }
+
+    abstract boolean isSowable(PlayerNumber player);
 
 }

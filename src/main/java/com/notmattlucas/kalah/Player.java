@@ -6,11 +6,14 @@ public class Player {
 
     private final List<House> houses;
 
-    private final EndZone endZone;
+    private final Store store;
 
-    public Player(List<House> houses, EndZone endZone) {
+    private final PlayerNumber num;
+
+    public Player(PlayerNumber num, List<House> houses, Store store) {
+        this.num = num;
         this.houses = houses;
-        this.endZone = endZone;
+        this.store = store;
     }
 
     public Pit turn(int houseNum) {
@@ -30,8 +33,10 @@ public class Player {
         Pit pit = house;
         while (seeds > 0) {
             pit = pit.next();
-            seeds--;
-            pit.sow();
+            if (pit.isSowable(num)) {
+                seeds--;
+                pit.sow();
+            };
         }
         return pit;
     }
@@ -41,6 +46,14 @@ public class Player {
             throw new IllegalArgumentException("House number must be between 1 and " + houses.size());
         }
         return this.houses.get(houseNum - 1);
+    }
+
+    public PlayerNumber getNum() {
+        return num;
+    }
+
+    List<House> getHouses() {
+        return houses;
     }
 
 }
