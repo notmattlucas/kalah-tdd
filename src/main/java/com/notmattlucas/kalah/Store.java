@@ -21,4 +21,7 @@ public class Store extends Pit {
             '}';
     }
 
+    public void sow(int i) {
+        seeds += i;
+    }
 }

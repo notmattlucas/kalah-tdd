@@ -6,12 +6,14 @@ class TestGame {
 
     @Test
     void playerOneShouldTakeFirstTurn() {
-        Game game = new Game();
+        Game game = Game.create(Board.create());
     }
 
     @Test
     void shouldRejectMoveByInactivePlayer() {
 
     }
+
+
 
 }

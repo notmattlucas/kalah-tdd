@@ -14,7 +14,7 @@ public class TestPit {
     }
 
     @Test
-    public void endZoneShouldBeginEmpty() {
+    public void storeShouldBeginEmpty() {
         Pit endZone = new Store(ONE);
         assertThat(endZone.count()).isEqualTo(0);
     }
@@ -51,10 +51,17 @@ public class TestPit {
     }
 
     @Test
-    public void shouldBeAbleToSowSeedInEndZone() {
+    public void shouldBeAbleToSowSeedInStore() {
         Store store = new Store(ONE);
         store.sow();
         assertThat(store.count()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldBeAbleToSowMultipleSeedsInStore() {
+        Store store = new Store(ONE);
+        store.sow(4);
+        assertThat(store.count()).isEqualTo(4);
     }
 
 }

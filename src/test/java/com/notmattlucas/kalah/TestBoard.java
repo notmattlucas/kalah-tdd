@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.notmattlucas.kalah.PlayerNumber.ONE;
 import static com.notmattlucas.kalah.PlayerNumber.TWO;
@@ -44,12 +45,23 @@ class TestBoard {
         Players players = board.getPlayers();
         List<House> housesOne = players.player1().getHouses();
         List<House> housesTwo = players.player2().getHouses();
-        for (int i = 0; i < housesOne.size(); i++) {
-            var houseOne = housesOne.get(i);
-            var houseTwo = housesTwo.get(housesTwo.size() - i - 1);
-            assertThat(houseOne.getOpposite()).isEqualTo(houseTwo);
-            assertThat(houseTwo.getOpposite()).isEqualTo(houseOne);
+        assertThat(housesOne.get(0).getOpposite()).isEqualTo(housesTwo.get(5));
+        assertThat(housesOne.get(1).getOpposite()).isEqualTo(housesTwo.get(4));
+        assertThat(housesOne.get(2).getOpposite()).isEqualTo(housesTwo.get(3));
+        assertThat(housesOne.get(3).getOpposite()).isEqualTo(housesTwo.get(2));
+        assertThat(housesOne.get(4).getOpposite()).isEqualTo(housesTwo.get(1));
+        assertThat(housesOne.get(5).getOpposite()).isEqualTo(housesTwo.get(0));
+    }
+
+    @Test
+    void allPitsShouldFormACycle() {
+        Board board = Board.create();
+        Pit first = board.getHouses().get(0);
+        Pit pit = first;
+        for (int i=0; i<14; i++) {
+            pit = pit.next();
         }
+        assertThat(pit).isEqualTo(first);
     }
 
 }

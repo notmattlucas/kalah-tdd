@@ -52,7 +52,7 @@ class TestPlayer {
     }
 
     @Test
-    void playerCannotSowOpponentsStore() {
+    void playerSkipsOpponentsStore() {
         House myHouse = new House(ONE,3);
         Store myStore = new Store(ONE);
         House opponentHouse = new House(TWO,0);
