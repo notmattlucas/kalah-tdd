@@ -1,15 +1,15 @@
-package com.notmattlucas.kalah;
+package com.notmattlucas.kalah.model;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.notmattlucas.kalah.PlayerNumber.ONE;
-import static com.notmattlucas.kalah.PlayerNumber.TWO;
-
-record Players(Player player1, Player player2) {}
+import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
+import static com.notmattlucas.kalah.model.PlayerNumber.TWO;
 
 public class Board {
+
+    public record Players(Player player1, Player player2) {}
 
     private List<House> houses;
 
@@ -20,7 +20,11 @@ public class Board {
     private Board() {}
 
     public static Board create() {
-        LinkedList<House> housesOne = chain(ONE, 4, 6);
+        return create(4, 6);
+    }
+
+    public static Board create(int seeds, int length) {
+        LinkedList<House> housesOne = chain(ONE, seeds, length);
         Store storeOne = new Store(ONE);
         Player playerOne = new Player(ONE, housesOne, storeOne);
 

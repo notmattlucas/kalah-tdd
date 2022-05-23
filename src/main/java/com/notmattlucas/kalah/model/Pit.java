@@ -1,6 +1,6 @@
-package com.notmattlucas.kalah;
+package com.notmattlucas.kalah.model;
 
-abstract class Pit {
+public abstract class Pit {
 
     protected int seeds;
 

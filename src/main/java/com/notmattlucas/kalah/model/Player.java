@@ -1,4 +1,4 @@
-package com.notmattlucas.kalah;
+package com.notmattlucas.kalah.model;
 
 import java.util.List;
 
@@ -52,8 +52,12 @@ public class Player {
         return num;
     }
 
-    List<House> getHouses() {
+    public List<House> getHouses() {
         return houses;
+    }
+
+    public Store getStore() {
+        return store;
     }
 
 }

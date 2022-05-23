@@ -1,12 +1,16 @@
-package com.notmattlucas.kalah;
+package com.notmattlucas.kalah.model;
 
+import com.notmattlucas.kalah.model.House;
+import com.notmattlucas.kalah.model.Pit;
+import com.notmattlucas.kalah.model.Player;
+import com.notmattlucas.kalah.model.Store;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static com.notmattlucas.kalah.PlayerNumber.*;
+import static com.notmattlucas.kalah.model.PlayerNumber.*;
 
 class TestPlayer {
     @Test

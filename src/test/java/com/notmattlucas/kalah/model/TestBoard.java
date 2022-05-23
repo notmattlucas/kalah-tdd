@@ -1,14 +1,14 @@
-package com.notmattlucas.kalah;
+package com.notmattlucas.kalah.model;
 
+import com.notmattlucas.kalah.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static com.notmattlucas.kalah.PlayerNumber.ONE;
-import static com.notmattlucas.kalah.PlayerNumber.TWO;
+import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
+import static com.notmattlucas.kalah.model.PlayerNumber.TWO;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class TestBoard {
@@ -34,7 +34,7 @@ class TestBoard {
     @Test
     void boardShouldHaveTwoPlayers() {
         Board board = Board.create();
-        Players players = board.getPlayers();
+        Board.Players players = board.getPlayers();
         assertThat(players.player1().getNum()).isEqualTo(ONE);
         assertThat(players.player2().getNum()).isEqualTo(TWO);
     }
@@ -42,7 +42,7 @@ class TestBoard {
     @Test
     void housesShouldHaveMutualOpposites() {
         Board board = Board.create();
-        Players players = board.getPlayers();
+        Board.Players players = board.getPlayers();
         List<House> housesOne = players.player1().getHouses();
         List<House> housesTwo = players.player2().getHouses();
         assertThat(housesOne.get(0).getOpposite()).isEqualTo(housesTwo.get(5));

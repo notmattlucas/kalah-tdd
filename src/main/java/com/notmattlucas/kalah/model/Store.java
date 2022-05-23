@@ -1,4 +1,4 @@
-package com.notmattlucas.kalah;
+package com.notmattlucas.kalah.model;
 
 
 
