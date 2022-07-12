@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
+import static com.notmattlucas.kalah.model.PlayerNumber.TWO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static com.notmattlucas.kalah.model.PlayerNumber.*;
 
-class TestPlayer {
+public class TestPlayer {
+
     @Test
     void playerShouldSowSeedsOnTurn() {
         House last = new House(ONE, 0);
@@ -48,14 +50,6 @@ class TestPlayer {
     }
 
     @Test
-    void playerCannotChooseHouseAboveRange() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Player player = new Player(ONE, List.of(new House(ONE, 0)), new Store(ONE));
-            player.turn(2);
-        });
-    }
-
-    @Test
     void playerSkipsOpponentsStore() {
         House myHouse = new House(ONE,3);
         Store myStore = new Store(ONE);
@@ -63,9 +57,9 @@ class TestPlayer {
         Store opponentStore = new Store(TWO);
 
         myHouse.setNext(myStore)
-            .setNext(opponentHouse)
-            .setNext(opponentStore)
-            .setNext(myHouse);
+                .setNext(opponentHouse)
+                .setNext(opponentStore)
+                .setNext(myHouse);
 
         Player player = new Player(ONE, List.of(myHouse), myStore);
         Pit landed = player.turn(1);

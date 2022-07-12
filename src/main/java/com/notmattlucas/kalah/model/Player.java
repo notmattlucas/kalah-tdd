@@ -2,19 +2,7 @@ package com.notmattlucas.kalah.model;
 
 import java.util.List;
 
-public class Player {
-
-    private final List<House> houses;
-
-    private final Store store;
-
-    private final PlayerNumber num;
-
-    public Player(PlayerNumber num, List<House> houses, Store store) {
-        this.num = num;
-        this.houses = houses;
-        this.store = store;
-    }
+public record Player(PlayerNumber num, List<House> houses, Store store) {
 
     public Pit turn(int houseNum) {
         House house = getHouse(houseNum);
@@ -46,18 +34,6 @@ public class Player {
             throw new IllegalArgumentException("House number must be between 1 and " + houses.size());
         }
         return this.houses.get(houseNum - 1);
-    }
-
-    public PlayerNumber getNum() {
-        return num;
-    }
-
-    public List<House> getHouses() {
-        return houses;
-    }
-
-    public Store getStore() {
-        return store;
     }
 
 }

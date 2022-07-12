@@ -31,20 +31,16 @@ public class Game {
     }
 
     public Result move(PlayerNumber num, int house) {
-        if (!player.getNum().equals(num)) {
+        if (!player.num().equals(num)) {
             throw new IllegalStateException(String.format("Player %s cannot take their turn yet", num));
         }
         Pit landed = player.turn(house);
         player = nextPlayer(landed);
-        return new Result(status, player.getNum(), board);
-    }
-
-    public Player getActivePlayer() {
-        return player;
+        return new Result(status, player.num(), board);
     }
 
     public Player nextPlayer(Pit landed) {
-        if (landed.equals(player.getStore())) {
+        if (landed.equals(player.store())) {
             return player;
         }
         return swap();
@@ -52,10 +48,14 @@ public class Game {
 
     private Player swap() {
         Board.Players players = board.getPlayers();
-        return switch (player.getNum()) {
+        return switch (player.num()) {
             case ONE -> players.player2();
             case TWO -> players.player1();
         };
+    }
+
+    public Player getActivePlayer() {
+        return player;
     }
 
 }

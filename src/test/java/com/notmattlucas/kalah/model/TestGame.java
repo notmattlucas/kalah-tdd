@@ -1,14 +1,17 @@
 package com.notmattlucas.kalah.model;
 
+import com.notmattlucas.kalah.model.Board;
+import com.notmattlucas.kalah.model.Game;
+import com.notmattlucas.kalah.model.Player;
 import com.notmattlucas.kalah.ui.PrettyPrint;
 import org.junit.jupiter.api.Test;
 
+import static com.notmattlucas.kalah.model.Game.Status.ACTIVE;
 import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
 import static com.notmattlucas.kalah.model.PlayerNumber.TWO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-import static com.notmattlucas.kalah.model.Game.Status.*;
 
 class TestGame {
 
@@ -16,7 +19,7 @@ class TestGame {
     void playerOneShouldTakeFirstTurn() {
         Game game = Game.create(Board.create());
         Player player = game.getActivePlayer();
-        assertThat(player.getNum()).isEqualTo(ONE);
+        assertThat(player.num()).isEqualTo(ONE);
     }
 
     @Test
@@ -70,11 +73,6 @@ class TestGame {
     }
 
     @Test
-    void shouldCaptureOppositeWhenLandingInOwnEmptyHouse() {
-        fail();
-    }
-
-    @Test
     void shouldGetAnotherTurnWhenLandingInOwnStore() {
         Game game = Game.create(Board.create());
         Game.Result result = game.move(ONE, 3);
@@ -88,6 +86,11 @@ class TestGame {
         """);
         assertThat(result.next()).isEqualTo(ONE);
         assertThat(result.status()).isEqualTo(ACTIVE);
+    }
+
+    @Test
+    void shouldCaptureOppositeWhenLandingInOwnEmptyHouse() {
+        fail();
     }
 
     @Test

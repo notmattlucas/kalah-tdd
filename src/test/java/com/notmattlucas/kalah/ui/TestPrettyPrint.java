@@ -1,6 +1,7 @@
 package com.notmattlucas.kalah.ui;
 
 import com.notmattlucas.kalah.model.Board;
+import com.notmattlucas.kalah.ui.PrettyPrint;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

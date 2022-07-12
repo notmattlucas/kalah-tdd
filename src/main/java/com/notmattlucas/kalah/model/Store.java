@@ -1,14 +1,15 @@
 package com.notmattlucas.kalah.model;
 
-
-
 public class Store extends Pit {
 
-    public Store(PlayerNumber owner) {
+    Store(PlayerNumber owner) {
         super(owner, 0);
     }
 
-    @Override
+    public void sow(int i) {
+        seeds += i;
+    }
+
     boolean isSowable(PlayerNumber player) {
         return player.equals(owner);
     }
@@ -16,12 +17,9 @@ public class Store extends Pit {
     @Override
     public String toString() {
         return "Store{" +
-            "seeds=" + seeds +
-            ", owner=" + owner +
-            '}';
+                "seeds=" + seeds +
+                ", owner=" + owner +
+                '}';
     }
 
-    public void sow(int i) {
-        seeds += i;
-    }
 }

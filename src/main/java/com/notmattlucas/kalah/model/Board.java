@@ -24,31 +24,36 @@ public class Board {
     }
 
     public static Board create(int seeds, int length) {
-        LinkedList<House> housesOne = chain(ONE, seeds, length);
-        Store storeOne = new Store(ONE);
-        Player playerOne = new Player(ONE, housesOne, storeOne);
-
-        LinkedList<House> housesTwo = chain(TWO, 4, 6);
-        Store storeTwo = new Store(TWO);
-        Player playerTwo = new Player(TWO, housesTwo, storeTwo);
-
+        LinkedList<House> housesOne = buildHouses(ONE, seeds, length);
+        LinkedList<House> housesTwo = buildHouses(TWO, seeds, length);
         mutuallyOpposite(housesOne, housesTwo);
+
+        Store storeOne = new Store(ONE);
+        Store storeTwo = new Store(TWO);
+
         circular(housesOne, storeOne, housesTwo, storeTwo);
+
+        Player playerOne = new Player(ONE, housesOne, storeOne);
+        Player playerTwo = new Player(TWO, housesTwo, storeTwo);
 
         Board board = new Board();
         board.houses = new ArrayList<>(housesOne);
         board.houses.addAll(housesTwo);
-
         board.stores = List.of(storeOne, storeTwo);
         board.players = new Players(playerOne, playerTwo);
+
         return board;
     }
 
-    private static void circular(LinkedList<House> housesOne, Store storeOne, LinkedList<House> housesTwo, Store storeTwo) {
-        housesOne.getLast().setNext(storeOne);
-        storeOne.setNext(housesTwo.getFirst());
-        housesTwo.getLast().setNext(storeTwo);
-        storeTwo.setNext(housesOne.getFirst());
+    private static LinkedList<House> buildHouses(PlayerNumber playerNumber, int seeds, int length) {
+        LinkedList<House> houses = new LinkedList<>();
+        houses.addLast(new House(playerNumber, seeds));
+        while (houses.size() < length) {
+            House house = new House(playerNumber, seeds);
+            houses.getLast().setNext(house);
+            houses.addLast(house);
+        }
+        return houses;
     }
 
     private static void mutuallyOpposite(List<House> housesOne, List<House> housesTwo) {
@@ -58,6 +63,13 @@ public class Board {
             one.setOpposite(two);
             two.setOpposite(one);
         }
+    }
+
+    private static void circular(LinkedList<House> housesOne, Store storeOne, LinkedList<House> housesTwo, Store storeTwo) {
+        housesOne.getLast().setNext(storeOne);
+        storeOne.setNext(housesTwo.getFirst());
+        housesTwo.getLast().setNext(storeTwo);
+        storeTwo.setNext(housesOne.getFirst());
     }
 
     public List<House> getHouses() {
@@ -71,16 +83,4 @@ public class Board {
     public Players getPlayers() {
         return players;
     }
-
-    private static LinkedList<House> chain(PlayerNumber playerNumber, int seeds, int length) {
-        LinkedList<House> chain = new LinkedList<>();
-        chain.addLast(new House(playerNumber, seeds));
-        while (chain.size() < length) {
-            House house = new House(playerNumber, seeds);
-            chain.getLast().setNext(house);
-            chain.addLast(house);
-        }
-        return chain;
-    }
-
 }

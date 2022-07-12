@@ -3,8 +3,10 @@ package com.notmattlucas.kalah.model;
 import com.notmattlucas.kalah.model.*;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
@@ -35,22 +37,28 @@ class TestBoard {
     void boardShouldHaveTwoPlayers() {
         Board board = Board.create();
         Board.Players players = board.getPlayers();
-        assertThat(players.player1().getNum()).isEqualTo(ONE);
-        assertThat(players.player2().getNum()).isEqualTo(TWO);
+        assertThat(players.player1().num()).isEqualTo(ONE);
+        assertThat(players.player2().num()).isEqualTo(TWO);
     }
 
     @Test
     void housesShouldHaveMutualOpposites() {
         Board board = Board.create();
         Board.Players players = board.getPlayers();
-        List<House> housesOne = players.player1().getHouses();
-        List<House> housesTwo = players.player2().getHouses();
+        List<House> housesOne = players.player1().houses();
+        List<House> housesTwo = players.player2().houses();
         assertThat(housesOne.get(0).getOpposite()).isEqualTo(housesTwo.get(5));
         assertThat(housesOne.get(1).getOpposite()).isEqualTo(housesTwo.get(4));
         assertThat(housesOne.get(2).getOpposite()).isEqualTo(housesTwo.get(3));
         assertThat(housesOne.get(3).getOpposite()).isEqualTo(housesTwo.get(2));
         assertThat(housesOne.get(4).getOpposite()).isEqualTo(housesTwo.get(1));
         assertThat(housesOne.get(5).getOpposite()).isEqualTo(housesTwo.get(0));
+        assertThat(housesTwo.get(0).getOpposite()).isEqualTo(housesOne.get(5));
+        assertThat(housesTwo.get(1).getOpposite()).isEqualTo(housesOne.get(4));
+        assertThat(housesTwo.get(2).getOpposite()).isEqualTo(housesOne.get(3));
+        assertThat(housesTwo.get(3).getOpposite()).isEqualTo(housesOne.get(2));
+        assertThat(housesTwo.get(4).getOpposite()).isEqualTo(housesOne.get(1));
+        assertThat(housesTwo.get(5).getOpposite()).isEqualTo(housesOne.get(0));
     }
 
     @Test
@@ -58,10 +66,17 @@ class TestBoard {
         Board board = Board.create();
         Pit first = board.getHouses().get(0);
         Pit pit = first;
+
+        Set<Pit> all = new HashSet<>();
+        all.add(pit);
+
         for (int i=0; i<14; i++) {
             pit = pit.next();
+            all.add(pit);
         }
+
         assertThat(pit).isEqualTo(first);
+        assertThat(all.size()).isEqualTo(14);
     }
 
 }

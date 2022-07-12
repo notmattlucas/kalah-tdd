@@ -4,7 +4,7 @@ public class House extends Pit {
 
     private House opposite;
 
-    public House(PlayerNumber owner, int seeds) {
+    House(PlayerNumber owner, int seeds) {
         super(owner, seeds);
     }
 
@@ -14,19 +14,6 @@ public class House extends Pit {
         return seeds;
     }
 
-    @Override
-    boolean isSowable(PlayerNumber player) {
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "House{" +
-            "seeds=" + seeds +
-            ", owner=" + owner +
-            '}';
-    }
-
     public House getOpposite() {
         return opposite;
     }
@@ -34,4 +21,17 @@ public class House extends Pit {
     public void setOpposite(House opposite) {
         this.opposite = opposite;
     }
+
+    boolean isSowable(PlayerNumber player) {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "seeds=" + seeds +
+                ", owner=" + owner +
+                '}';
+    }
+
 }

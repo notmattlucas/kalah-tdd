@@ -5,8 +5,8 @@ import com.notmattlucas.kalah.model.Pit;
 import com.notmattlucas.kalah.model.Store;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestPit {
 
@@ -26,7 +26,7 @@ public class TestPit {
     public void shouldPointToTheNextPit() {
         Pit a = new House(ONE, 4);
         Store b = new Store(ONE);
-        House c = new House(ONE,4);
+        House c = new House(ONE, 4);
 
         a.setNext(b);
         b.setNext(c);
@@ -37,7 +37,7 @@ public class TestPit {
 
     @Test
     public void shouldBeAbleToTakeSeedsFromHouse() {
-        House house = new House(ONE,4);
+        House house = new House(ONE, 4);
         assertThat(house.count()).isEqualTo(4);
 
         Integer taken = house.take();
@@ -48,7 +48,7 @@ public class TestPit {
 
     @Test
     public void shouldBeAbleToSowSeedInHouse() {
-        House house = new House(ONE,0);
+        House house = new House(ONE, 0);
         house.sow();
         assertThat(house.count()).isEqualTo(1);
     }

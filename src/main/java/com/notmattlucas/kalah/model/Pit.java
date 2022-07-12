@@ -30,14 +30,14 @@ public abstract class Pit {
         this.seeds++;
     }
 
-    public boolean isEmpty() {
-        return this.seeds == 0;
-    }
-
     public PlayerNumber getOwner() {
         return owner;
     }
 
     abstract boolean isSowable(PlayerNumber player);
+
+    public boolean isEmpty() {
+        return this.seeds == 0;
+    }
 
 }
