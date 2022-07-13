@@ -7,7 +7,16 @@ public record Player(PlayerNumber num, List<House> houses, Store store) {
     public Pit turn(int houseNum) {
         House house = getHouse(houseNum);
         checkHasSeeds(house);
-        return takeTurn(house);
+        Pit pit = takeTurn(house);
+        if (shouldCaptureOpposite(pit)) {
+            store.sow(pit.take());
+            store.sow(pit.capture());
+        }
+        return pit;
+    }
+
+    private boolean shouldCaptureOpposite(Pit pit) {
+        return pit.count() == 1 && pit.getOpposite().isPresent();
     }
 
     private void checkHasSeeds(House house) {

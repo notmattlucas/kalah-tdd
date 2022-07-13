@@ -6,6 +6,8 @@ import com.notmattlucas.kalah.model.Player;
 import com.notmattlucas.kalah.ui.PrettyPrint;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static com.notmattlucas.kalah.model.Game.Status.ACTIVE;
 import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
 import static com.notmattlucas.kalah.model.PlayerNumber.TWO;
@@ -90,7 +92,31 @@ class TestGame {
 
     @Test
     void shouldCaptureOppositeWhenLandingInOwnEmptyHouse() {
-        fail();
+        var board = Board.from(
+            List.of(4, 4, 4, 4, 0, 5),
+            1,
+            List.of(5, 5, 4, 4, 4, 4),
+            0
+        );
+        Game game = Game.create(board);
+        var actual =  PrettyPrint.board(board);
+        assertThat(actual).isEqualTo("""
+                       Player Two
+             | 04 | 04 | 04 | 04 | 05 | 05 |
+        (00)                                 (01)
+             | 04 | 04 | 04 | 04 | 00 | 05 |
+                       Player One
+        """);
+
+        Game.Result result = game.move(ONE, 1);
+        actual =  PrettyPrint.board(result.board());
+        assertThat(actual).isEqualTo("""
+                       Player Two
+             | 04 | 04 | 04 | 04 | 00 | 05 |
+        (00)                                 (07)
+             | 00 | 05 | 05 | 05 | 00 | 05 |
+                       Player One
+        """);
     }
 
     @Test

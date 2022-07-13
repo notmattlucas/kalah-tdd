@@ -3,6 +3,8 @@ package com.notmattlucas.kalah.model;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static com.notmattlucas.kalah.model.PlayerNumber.ONE;
 import static com.notmattlucas.kalah.model.PlayerNumber.TWO;
@@ -23,13 +25,18 @@ public class Board {
         return create(4, 6);
     }
 
-    public static Board create(int seeds, int length) {
-        LinkedList<House> housesOne = buildHouses(ONE, seeds, length);
-        LinkedList<House> housesTwo = buildHouses(TWO, seeds, length);
+    public static Board create(int numberOfSeeds, int length) {
+        var seeds = Stream.generate(() -> numberOfSeeds).limit(length).toList();
+        return from(seeds, 0, seeds, 0);
+    }
+
+    public static Board from(List<Integer> p1Houses, int p1Store, List<Integer> p2Houses, int p2Store) {
+        LinkedList<House> housesOne = buildHouses(ONE, p1Houses);
+        LinkedList<House> housesTwo = buildHouses(TWO, p2Houses);
         mutuallyOpposite(housesOne, housesTwo);
 
-        Store storeOne = new Store(ONE);
-        Store storeTwo = new Store(TWO);
+        Store storeOne = new Store(ONE, p1Store);
+        Store storeTwo = new Store(TWO, p2Store);
 
         circular(housesOne, storeOne, housesTwo, storeTwo);
 
@@ -45,11 +52,11 @@ public class Board {
         return board;
     }
 
-    private static LinkedList<House> buildHouses(PlayerNumber playerNumber, int seeds, int length) {
+    private static LinkedList<House> buildHouses(PlayerNumber playerNumber, List<Integer> seeds) {
         LinkedList<House> houses = new LinkedList<>();
-        houses.addLast(new House(playerNumber, seeds));
-        while (houses.size() < length) {
-            House house = new House(playerNumber, seeds);
+        houses.addLast(new House(playerNumber, seeds.get(0)));
+        while (houses.size() < seeds.size()) {
+            House house = new House(playerNumber, seeds.get(houses.size()));
             houses.getLast().setNext(house);
             houses.addLast(house);
         }

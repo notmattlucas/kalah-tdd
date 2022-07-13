@@ -1,5 +1,7 @@
 package com.notmattlucas.kalah.model;
 
+import java.util.Optional;
+
 public abstract class Pit {
 
     protected int seeds;
@@ -38,6 +40,21 @@ public abstract class Pit {
 
     public boolean isEmpty() {
         return this.seeds == 0;
+    }
+
+    public Optional<House> getOpposite() {
+        return Optional.empty();
+    }
+
+    public Integer capture() {
+        if (this.getOpposite().isEmpty()) {
+            return 0;
+        }
+        return this.getOpposite().get().take();
+    }
+
+    public Integer take() {
+        return 0;
     }
 
 }

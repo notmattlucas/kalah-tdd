@@ -1,5 +1,7 @@
 package com.notmattlucas.kalah.model;
 
+import java.util.Optional;
+
 public class House extends Pit {
 
     private House opposite;
@@ -8,14 +10,16 @@ public class House extends Pit {
         super(owner, seeds);
     }
 
+    @Override
     public Integer take() {
         int seeds = this.seeds;
         this.seeds = 0;
         return seeds;
     }
 
-    public House getOpposite() {
-        return opposite;
+    @Override
+    public Optional<House> getOpposite() {
+        return Optional.of(opposite);
     }
 
     public void setOpposite(House opposite) {
