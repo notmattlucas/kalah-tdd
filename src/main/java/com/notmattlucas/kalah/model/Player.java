@@ -15,6 +15,20 @@ public record Player(PlayerNumber num, List<House> houses, Store store) {
         return pit;
     }
 
+    public boolean complete() {
+        return houses.stream().allMatch(House::isEmpty);
+    }
+
+    public void finish() {
+        for (House house: houses) {
+            store.sow(house.take());
+        }
+    }
+
+    public int score() {
+        return store.count();
+    }
+
     private boolean shouldCaptureOpposite(Pit pit) {
         return pit.count() == 1 && pit.getOpposite().isPresent();
     }

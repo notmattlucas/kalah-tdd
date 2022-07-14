@@ -35,18 +35,35 @@ public class Game {
             throw new IllegalStateException(String.format("Player %s cannot take their turn yet", num));
         }
         Pit landed = player.turn(house);
+        if (player.complete()) {
+            otherPlayer().finish();
+            status = declareWinner();
+        }
         player = nextPlayer(landed);
         return new Result(status, player.num(), board);
+    }
+
+    private Status declareWinner() {
+        Board.Players players = board.getPlayers();
+        int score1 = players.player1().score();
+        int score2 = players.player2().score();
+        if (score1 > score2) {
+            return Status.PLAYER_ONE_WIN;
+        }
+        if (score2 > score1) {
+            return Status.PLAYER_TWO_WIN;
+        }
+        return Status.DRAW;
     }
 
     public Player nextPlayer(Pit landed) {
         if (landed.equals(player.store())) {
             return player;
         }
-        return swap();
+        return otherPlayer();
     }
 
-    private Player swap() {
+    private Player otherPlayer() {
         Board.Players players = board.getPlayers();
         return switch (player.num()) {
             case ONE -> players.player2();

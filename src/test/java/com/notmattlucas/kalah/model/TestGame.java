@@ -121,17 +121,52 @@ class TestGame {
 
     @Test
     void shouldFinishGameWhenOnePlayerHasNoSeeds() {
-        fail();
-    }
+        var board = Board.from(
+                List.of(0, 0, 0, 0, 0, 1),
+                24,
+                List.of(4, 4, 4, 4, 4, 3),
+                0
+        );
+        Game game = Game.create(board);
+        var actual =  PrettyPrint.board(board);
+        assertThat(actual).isEqualTo("""
+                       Player Two
+             | 03 | 04 | 04 | 04 | 04 | 04 |
+        (00)                                 (24)
+             | 00 | 00 | 00 | 00 | 00 | 01 |
+                       Player One
+        """);
 
-    @Test
-    void shouldDeclareWinnerBasedOnSeeds() {
-        fail();
+        Game.Result result = game.move(ONE, 6);
+        Board.Players players = board.getPlayers();
+        assertThat(players.player1().score()).isEqualTo(25);
+        assertThat(players.player2().score()).isEqualTo(23);
+        assertThat(result.status()).isEqualTo(Game.Status.PLAYER_ONE_WIN);
     }
 
     @Test
     void shouldAllowDrawWhenSameSeeds() {
-        fail();
+        var board = Board.from(
+                List.of(0, 0, 0, 0, 0, 1),
+                23,
+                List.of(4, 4, 4, 4, 4, 4),
+                0
+        );
+        Game game = Game.create(board);
+        var actual =  PrettyPrint.board(board);
+        assertThat(actual).isEqualTo("""
+                       Player Two
+             | 04 | 04 | 04 | 04 | 04 | 04 |
+        (00)                                 (23)
+             | 00 | 00 | 00 | 00 | 00 | 01 |
+                       Player One
+        """);
+
+        Game.Result result = game.move(ONE, 6);
+        Board.Players players = board.getPlayers();
+        assertThat(players.player1().score()).isEqualTo(24);
+        assertThat(players.player2().score()).isEqualTo(24);
+        assertThat(result.status()).isEqualTo(Game.Status.DRAW);
     }
 
     @Test

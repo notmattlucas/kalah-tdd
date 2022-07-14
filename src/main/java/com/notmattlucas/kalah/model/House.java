@@ -2,7 +2,7 @@ package com.notmattlucas.kalah.model;
 
 import java.util.Optional;
 
-public class House extends Pit {
+    public class House extends Pit {
 
     private House opposite;
 
@@ -19,7 +19,7 @@ public class House extends Pit {
 
     @Override
     public Optional<House> getOpposite() {
-        return Optional.of(opposite);
+        return Optional.ofNullable(opposite);
     }
 
     public void setOpposite(House opposite) {

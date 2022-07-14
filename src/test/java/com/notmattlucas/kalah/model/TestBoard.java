@@ -47,18 +47,18 @@ class TestBoard {
         Board.Players players = board.getPlayers();
         List<House> housesOne = players.player1().houses();
         List<House> housesTwo = players.player2().houses();
-        assertThat(housesOne.get(0).getOpposite()).isEqualTo(housesTwo.get(5));
-        assertThat(housesOne.get(1).getOpposite()).isEqualTo(housesTwo.get(4));
-        assertThat(housesOne.get(2).getOpposite()).isEqualTo(housesTwo.get(3));
-        assertThat(housesOne.get(3).getOpposite()).isEqualTo(housesTwo.get(2));
-        assertThat(housesOne.get(4).getOpposite()).isEqualTo(housesTwo.get(1));
-        assertThat(housesOne.get(5).getOpposite()).isEqualTo(housesTwo.get(0));
-        assertThat(housesTwo.get(0).getOpposite()).isEqualTo(housesOne.get(5));
-        assertThat(housesTwo.get(1).getOpposite()).isEqualTo(housesOne.get(4));
-        assertThat(housesTwo.get(2).getOpposite()).isEqualTo(housesOne.get(3));
-        assertThat(housesTwo.get(3).getOpposite()).isEqualTo(housesOne.get(2));
-        assertThat(housesTwo.get(4).getOpposite()).isEqualTo(housesOne.get(1));
-        assertThat(housesTwo.get(5).getOpposite()).isEqualTo(housesOne.get(0));
+        assertThat(housesOne.get(0).getOpposite().get()).isEqualTo(housesTwo.get(5));
+        assertThat(housesOne.get(1).getOpposite().get()).isEqualTo(housesTwo.get(4));
+        assertThat(housesOne.get(2).getOpposite().get()).isEqualTo(housesTwo.get(3));
+        assertThat(housesOne.get(3).getOpposite().get()).isEqualTo(housesTwo.get(2));
+        assertThat(housesOne.get(4).getOpposite().get()).isEqualTo(housesTwo.get(1));
+        assertThat(housesOne.get(5).getOpposite().get()).isEqualTo(housesTwo.get(0));
+        assertThat(housesTwo.get(0).getOpposite().get()).isEqualTo(housesOne.get(5));
+        assertThat(housesTwo.get(1).getOpposite().get()).isEqualTo(housesOne.get(4));
+        assertThat(housesTwo.get(2).getOpposite().get()).isEqualTo(housesOne.get(3));
+        assertThat(housesTwo.get(3).getOpposite().get()).isEqualTo(housesOne.get(2));
+        assertThat(housesTwo.get(4).getOpposite().get()).isEqualTo(housesOne.get(1));
+        assertThat(housesTwo.get(5).getOpposite().get()).isEqualTo(housesOne.get(0));
     }
 
     @Test
