@@ -169,9 +169,42 @@ class TestGame {
         assertThat(result.status()).isEqualTo(Game.Status.DRAW);
     }
 
+    private record Move(PlayerNumber player, int house) {};
+
+    /**
+     * Sample taken from http://syllabus.cs.manchester.ac.uk/ugt/2020/COMP34120/KalahRulesCurrent.htm
+     */
     @Test
-    void shouldPlayCompleteGame() {
-        fail();
+    void examplePlay() {
+        var board = Board.from(
+                List.of(3, 2, 2, 1, 1, 3),
+                6,
+                List.of(2, 0, 4, 2, 2, 2),
+                7
+        );
+        Game game = Game.create(board);
+        var actual =  PrettyPrint.board(board);
+        assertThat(actual).isEqualTo("""
+                       Player Two
+             | 02 | 02 | 02 | 04 | 00 | 02 |
+        (07)                                 (06)
+             | 03 | 02 | 02 | 01 | 01 | 03 |
+                       Player One
+        """);
+
+        game.move(ONE, 4);
+        game.move(TWO, 6);
+        game.move(ONE, 5);
+        var result = game.move(ONE, 2);
+
+        actual =  PrettyPrint.board(result.board());
+        assertThat(actual).isEqualTo("""
+                       Player Two
+             | 00 | 02 | 02 | 00 | 00 | 02 |
+        (08)                                 (12)
+             | 04 | 00 | 03 | 00 | 00 | 04 |
+                       Player One
+        """);
     }
 
 }
